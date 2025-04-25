@@ -18,8 +18,7 @@ app.use(express.json());
 
 // MongoDB connection
 mongoose.connect("mongodb+srv://anjali05:versa%4005@crypto.kbnkguw.mongodb.net/crypto?retryWrites=true&w=majority", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
 }).then(() => {
   console.log("MongoDB connected");
 }).catch((err) => {
