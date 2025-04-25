@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const axios = require('axios');
 const cors = require('cors');
 const Coin = require('./Coin');
+const rateLimit = require("express-rate-limit");
+
+
 
 const API_URL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false';
 
@@ -58,4 +61,11 @@ app.get('/api/coins', async (req, res) => {
   app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
   });
+  
+  const limiter = rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute window
+    max: 30, // limit each IP to 30 requests per minute
+  });
+  
+  app.use(limiter);
   
